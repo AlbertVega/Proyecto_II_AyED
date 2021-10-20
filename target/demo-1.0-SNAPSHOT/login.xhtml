@@ -4,20 +4,69 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+    <title>Calculadora aritmética</title>
 </h:head>
 
 <h:body>
-    <p:panel id = "Pnlogin" header = "Inicio de sesión">
-        <p:panelGrid id = "PnGrid" layout="grid" columns="1">
-            <p:outputLabel id = "lblUsuario" value="USUARIO: ">
+    <h:form>
+        <p:panelGrid class="ui-noborder">
+            <f:facet name="header">
+                <p:row>
+                    <p:column style="font-weight: 1000;">Introduce los parámetros</p:column>
+                    <p:column style="font-weight: 1000;">Valor de los parámetros</p:column>
+                </p:row>
+            </f:facet>
 
-            </p:outputLabel>
+            <p:row>
+                <p:column>
+                    <h:outputLabel value="Parametro1: "/>
+                </p:column>
+                <p:column>
+                    <p:inputNumber id="parametro1" value="#{calculadora.parametro1}">
+                        <p:ajax update="parametro1" />
+                    </p:inputNumber>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <h:outputLabel value="Parametro2: "/>
+                </p:column>
+                <p:column>
+                    <p:inputNumber id="parametro2" value="#{calculadora.parametro2}">
+                        <p:ajax update="parametro2" />
+                    </p:inputNumber>
+                </p:column>
+            </p:row>
 
-            <p:outputLabel id = "lblpassword" value="CONSTRASEÑA: ">
+            <p:row>
+                <p:column>
+                    <h:commandButton value="Suma" action="#{calculadora.suma}"/>
+                    <h:commandButton value="Resta" action="#{calculadora.resta}"/>
+                    <h:commandButton value="Multiplicación" action="#{calculadora.multiplicacion}"/>
+                    <h:commandButton value="División" action="#{calculadora.division}"/>
+                </p:column>
+                <p:column>
 
-            </p:outputLabel>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <h:outputLabel value="Resultado: "/>
+                    <h:outputText value="#{calculadora.resultado}"/>
+                </p:column>
+                <p:column>
+
+                </p:column>
+            </p:row>
+
+
 
         </p:panelGrid>
-    </p:panel>
+
+
+
+    </h:form>
+
 </h:body>
 </html>
