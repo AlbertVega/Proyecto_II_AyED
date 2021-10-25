@@ -9,18 +9,13 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class Calculadora implements Serializable {
-    public String infix;
-    public String postfix;
+    String infix;
+    String postfix;
+    String resultado;
 
     public String getResultado() {
         return resultado;
     }
-
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
-    }
-
-    public String resultado;
 
     public String getInfix() {
         return infix;
@@ -30,14 +25,6 @@ public class Calculadora implements Serializable {
         this.infix = infix;
     }
 
-    public String getPostfix() {
-        return postfix;
-    }
-
-    public void setPostfix(String postfix) {
-        this.postfix = postfix;
-    }
-
     public void calcular(){
         postfix = InfixToPostfix.toPostfix(infix);
         ExpressionTree et = new ExpressionTree();
@@ -45,8 +32,8 @@ public class Calculadora implements Serializable {
         Node root = et.constructTree(charArray);
         System.out.println("infix expression is");
         et.inorder(root);
-        resultado = Integer.toString(Integer.parseInt(postfix));
-        writeDataLineByLine("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
+        resultado = Integer.toString(et.evalTree(root));
+        writeDataLineByLine("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
     }
 
     public static void writeDataLineByLine(String filePath) {

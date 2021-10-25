@@ -75,13 +75,49 @@ class ExpressionTree {
         return t;
     }
 
+    public int evalTree(Node root)
+    {
+        // Empty tree
+        if (root == null)
+            return 0;
+
+        // Leaf node i.e, an integer
+        if (root.left == null && root.right == null)
+            return Character.getNumericValue(root.value);
+
+        // Evaluate left subtree
+        int leftEval = evalTree(root.left);
+
+        // Evaluate right subtree
+        int rightEval = evalTree(root.right);
+
+        // Check which operator to apply
+        if (String.valueOf(root.value).equals("+"))
+            return leftEval + rightEval;
+
+        if (String.valueOf(root.value).equals("-"))
+            return leftEval - rightEval;
+
+        if (String.valueOf(root.value).equals("*"))
+            return leftEval * rightEval;
+
+        if (String.valueOf(root.value).equals("/"))
+            return leftEval / rightEval;
+
+        if (String.valueOf(root.value).equals("%"))
+            return leftEval % rightEval;
+
+        return 0;
+    }
+
     public static void main(String[] args) {
         ExpressionTree et = new ExpressionTree();
-        String postfix = "ab+ef*g*-";
+        String postfix = "23+34*4*-";
         char[] charArray = postfix.toCharArray();
         Node root = et.constructTree(charArray);
         System.out.println("infix expression is");
         et.inorder(root);
+        System.out.println("= " + et.evalTree(root));
 
     }
 }

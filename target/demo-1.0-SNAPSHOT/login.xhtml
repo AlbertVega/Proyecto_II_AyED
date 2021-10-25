@@ -29,14 +29,14 @@
 
                 <p:row>
                     <p:column>
-                        <h:commandButton value="CALCULAR" action="#{calculadora.calcular}"/>
+                        <p:commandButton value="Calcular" action="#{calculadora.calcular}" ajax="false" styleClass="ui-button-outlined"/>
                     </p:column>
                 </p:row>
 
                 <p:row>
                     <p:column>
                         <h:outputLabel value="Resultado: "/>
-                        <h:outputText/>
+                        <h:outputText value="#{calculadora.resultado}"/>
                     </p:column>
 
                 </p:row>
