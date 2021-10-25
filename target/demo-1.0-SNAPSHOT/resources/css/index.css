@@ -1,0 +1,28 @@
+#principal{
+    background: #2b2b2b;
+}
+#cuadro {
+    margin: 200px auto;
+    width: 30%;
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.Panel {
+    text-align: center;
+    width:80%;
+    margin:0 auto;
+}
+
+

@@ -1,5 +1,3 @@
-package com.example.demo;
-
 // Java program to construct an expression tree
 
 import java.util.Stack;
@@ -24,7 +22,7 @@ class ExpressionTree {
     boolean isOperator(char c) {
         return c == '+' || c == '-'
                 || c == '*' || c == '/'
-                || c == '^';
+                || c == '%';
     }
 
     // Utility function to do inorder traversal
