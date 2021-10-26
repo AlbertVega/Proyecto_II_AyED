@@ -47,20 +47,20 @@
 
 <h:body id="registro">
     <h:form styleClass="Panel" columnClasses="left,middle,right">
-        <p:commandButton value="HISTORIAL" actionListener="#{registro.listarConsultas}" update="TablaDeRegistro" styleClass="ui-button-outlined"/>
+        <p:commandButton value="HISTORIAL" actionListener="#{calculadora.calcular}" update="TablaDeRegistro" styleClass="ui-button-outlined"/>
 
-        <p:dataTable id="TablaDeRegistro" value="#{registro.lista}" var="p">
+        <p:dataTable id="TablaDeRegistro">
 
             <p:column headerText="Expresion">
-                <p:outputLabel value="#{p.expresion}"/>
+                <p:outputLabel value="#{calculadora.infix}"/>
             </p:column>
 
             <p:column headerText="Resultado">
-                <p:outputLabel value="#{p.resultado}"/>
+                <p:outputLabel value="#{calculadora.resultado}"/>
             </p:column>
 
             <p:column headerText="Fecha">
-                <p:outputLabel value="#{p.fecha}"/>
+                <p:outputLabel value="#{calculadora.fecha}"/>
             </p:column>
 
         </p:dataTable>

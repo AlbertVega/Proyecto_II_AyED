@@ -14,6 +14,11 @@ public class Calculadora implements Serializable {
     static String infix;
     static String postfix;
     static String resultado;
+    java.util.Date fecha = new Date();
+
+    public Date getFecha() {
+        return fecha;
+    }
 
     public String getResultado() {
         return resultado;
@@ -27,7 +32,7 @@ public class Calculadora implements Serializable {
         Calculadora.infix = infix;
     }
 
-    public void calcular(){
+    public void calcular() {
         postfix = InfixToPostfix.toPostfix(infix);
         ExpressionTree et = new ExpressionTree();
         char[] charArray = postfix.toCharArray();
@@ -35,16 +40,16 @@ public class Calculadora implements Serializable {
         System.out.println("infix expression is");
         et.inorder(root);
         resultado = Integer.toString(et.evalTree(root));
-        writeDataLineByLine("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
-        readCSVColumn();
+        writeDataAtEnd("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
+        CSVtoArray("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
     }
 
-    public void readCSVColumn(){
+    public void readCSVColumn() {
         try {
 
-            CSVReader reader = new CSVReader(new FileReader("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt"));
+            CSVReader reader = new CSVReader(new FileReader("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt"));
 
-            String [] nextLine;
+            String[] nextLine;
             int rowNumber = 0;
             while ((nextLine = reader.readNext()) != null) {
                 rowNumber++;
@@ -54,6 +59,15 @@ public class Calculadora implements Serializable {
             System.out.println(Arrays.toString(nextLine));
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void CSVtoArray(String filePath){
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+            List<String[]> r = reader.readAll();
+            r.forEach(x -> System.out.println(Arrays.toString(x)));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -71,18 +85,25 @@ public class Calculadora implements Serializable {
             CSVWriter writer = new CSVWriter(outputfile);
 
             // adding header to csv
-            String[] header = { "Expresión", "Resultado", "Fecha" };
+            String[] header = {"Expresión", "Resultado", "Fecha"};
             writer.writeNext(header);
-            java.util.Date fecha = new Date();
-            // add data to csv
-            String[] data1 = {infix, resultado, fecha.toString()};
-            writer.writeNext(data1);
-
             // closing writer connection
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void writeDataAtEnd(String filePath) {
+        try {
+            CSVWriter writer = new CSVWriter(new FileWriter(filePath, true));
+
+            //Verifying the read data here
+            String[] data = {infix, resultado, fecha.toString()};
+            writer.writeNext(data);
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

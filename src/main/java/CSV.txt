@@ -1,2 +1,3 @@
 "Expresión","Resultado","Fecha"
-
+"8+5","13","Mon Oct 25 22:25:45 GALT 2021"
+"6+9","15","Mon Oct 25 22:25:58 GALT 2021"
