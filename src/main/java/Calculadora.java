@@ -1,18 +1,19 @@
+import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.Calendar;
+
+import java.io.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
 public class Calculadora implements Serializable {
-    String infix;
-    String postfix;
-    String resultado;
+    static String infix;
+    static String postfix;
+    static String resultado;
 
     public String getResultado() {
         return resultado;
@@ -34,7 +35,27 @@ public class Calculadora implements Serializable {
         System.out.println("infix expression is");
         et.inorder(root);
         resultado = Integer.toString(et.evalTree(root));
-        writeDataLineByLine("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
+        writeDataLineByLine("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
+        readCSVColumn();
+    }
+
+    public void readCSVColumn(){
+        try {
+
+            CSVReader reader = new CSVReader(new FileReader("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt"));
+
+            String [] nextLine;
+            int rowNumber = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                rowNumber++;
+                String name = nextLine[1];
+                String name2 = nextLine[2];
+            }
+            System.out.println(Arrays.toString(nextLine));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void writeDataLineByLine(String filePath) {
@@ -52,9 +73,9 @@ public class Calculadora implements Serializable {
             // adding header to csv
             String[] header = { "Expresión", "Resultado", "Fecha" };
             writer.writeNext(header);
-
+            java.util.Date fecha = new Date();
             // add data to csv
-            String[] data1 = { };
+            String[] data1 = {infix, resultado, fecha.toString()};
             writer.writeNext(data1);
 
             // closing writer connection

@@ -47,7 +47,7 @@
 
 <h:body id="registro">
     <h:form styleClass="Panel" columnClasses="left,middle,right">
-        <p:commandButton value="HISTORIAL" actionListener="#{registro.listarConsultas}" update="TablaDeRegistro"/>
+        <p:commandButton value="HISTORIAL" actionListener="#{registro.listarConsultas}" update="TablaDeRegistro" styleClass="ui-button-outlined"/>
 
         <p:dataTable id="TablaDeRegistro" value="#{registro.lista}" var="p">
 
