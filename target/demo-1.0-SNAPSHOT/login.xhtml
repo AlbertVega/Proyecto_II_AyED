@@ -29,20 +29,41 @@
 
                 <p:row>
                     <p:column>
-                        <p:commandButton value="Calcular" action="#{calculadora.calcular}" ajax="false" styleClass="ui-button-outlined"/>
+                        <p:commandButton value="Calcular" actionListener="#{calculadora.calcular}" update="textresultado" styleClass="ui-button-outlined"/>
                     </p:column>
                 </p:row>
 
                 <p:row>
                     <p:column>
                         <h:outputLabel value="Resultado: "/>
-                        <h:outputText value="#{calculadora.resultado}"/>
+                        <h:outputText id="textresultado" value="#{calculadora.resultado}"/>
                     </p:column>
-
                 </p:row>
 
             </p:panelGrid>
 
         </h:form>
+</h:body>
+
+<h:body id="registro">
+    <h:form styleClass="Panel" columnClasses="left,middle,right">
+        <p:commandButton value="HISTORIAL" actionListener="#{registro.listarConsultas}" update="TablaDeRegistro"/>
+
+        <p:dataTable id="TablaDeRegistro" value="#{registro.lista}" var="p">
+
+            <p:column headerText="Expresion">
+                <p:outputLabel value="#{p.expresion}"/>
+            </p:column>
+
+            <p:column headerText="Resultado">
+                <p:outputLabel value="#{p.resultado}"/>
+            </p:column>
+
+            <p:column headerText="Fecha">
+                <p:outputLabel value="#{p.fecha}"/>
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
 </h:body>
 </html>

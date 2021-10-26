@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -22,7 +23,7 @@ public class Calculadora implements Serializable {
     }
 
     public void setInfix(String infix) {
-        this.infix = infix;
+        Calculadora.infix = infix;
     }
 
     public void calcular(){
@@ -36,9 +37,10 @@ public class Calculadora implements Serializable {
         writeDataLineByLine("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
     }
 
-    public static void writeDataLineByLine(String filePath) {
+    public void writeDataLineByLine(String filePath) {
         // first create file object for file placed at location
         // specified by filepath
+
         File file = new File(filePath);
         try {
             // create FileWriter object with file as parameter
@@ -48,14 +50,12 @@ public class Calculadora implements Serializable {
             CSVWriter writer = new CSVWriter(outputfile);
 
             // adding header to csv
-            String[] header = { "Name", "Class", "Marks" };
+            String[] header = { "Expresión", "Resultado", "Fecha" };
             writer.writeNext(header);
 
             // add data to csv
-            String[] data1 = { "Aman", "10", "620" };
+            String[] data1 = { };
             writer.writeNext(data1);
-            String[] data2 = { "Suraj", "10", "630" };
-            writer.writeNext(data2);
 
             // closing writer connection
             writer.close();
