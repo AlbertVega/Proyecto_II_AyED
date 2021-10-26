@@ -82,7 +82,6 @@ class ExpressionTree {
         Node root = et.constructTree(charArray);
         System.out.println("infix expression is");
         et.inorder(root);
-
     }
 }
 

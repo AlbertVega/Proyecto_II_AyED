@@ -1,10 +1,4 @@
-import java.io.*;
-import java.io.Serializable;
 import java.util.Stack;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
-
 public class InfixToPostfix {
 
     // A utility function to return
