@@ -29,7 +29,7 @@
 
                 <p:row>
                     <p:column>
-                        <p:commandButton value="CALCULAR" actionListener="#{calculadora.calcular}" update="textresultado" styleClass="ui-button-outlined"/>
+                        <p:commandButton value="CALCULAR" actionListener="#{calculadora.calcular}" update="textresultado tabla:TablaDeRegistro"  styleClass="ui-button-outlined"/>
                     </p:column>
                 </p:row>
 
@@ -46,21 +46,20 @@
 </h:body>
 
 <h:body id="registro">
-    <h:form styleClass="Panel" columnClasses="left,middle,right">
-        <p:commandButton value="HISTORIAL" actionListener="#{calculadora.calcular}" update="TablaDeRegistro" styleClass="ui-button-outlined"/>
+    <h:form styleClass="Panel" id="tabla" columnClasses="left,middle,right">
 
-        <p:dataTable id="TablaDeRegistro">
+        <p:dataTable id="TablaDeRegistro" value="#{calculadora.csvArraylist}" var="p">
 
             <p:column headerText="Expresion">
-                <p:outputLabel value="#{calculadora.infix}"/>
+                <p:outputLabel value="#{p[0]}"/>
             </p:column>
 
             <p:column headerText="Resultado">
-                <p:outputLabel value="#{calculadora.resultado}"/>
+                <p:outputLabel value="#{p[1]}"/>
             </p:column>
 
             <p:column headerText="Fecha">
-                <p:outputLabel value="#{calculadora.fecha}"/>
+                <p:outputLabel value="#{p[2]}"/>
             </p:column>
 
         </p:dataTable>

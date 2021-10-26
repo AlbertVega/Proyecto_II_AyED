@@ -14,6 +14,12 @@ public class Calculadora implements Serializable {
     static String infix;
     static String postfix;
     static String resultado;
+
+    public List<String[]> getCsvArraylist() {
+        return csvArraylist;
+    }
+
+    public List<String[]> csvArraylist;
     java.util.Date fecha = new Date();
 
     public Date getFecha() {
@@ -40,14 +46,14 @@ public class Calculadora implements Serializable {
         System.out.println("infix expression is");
         et.inorder(root);
         resultado = Integer.toString(et.evalTree(root));
-        writeDataAtEnd("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
-        CSVtoArray("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
+        writeDataAtEnd("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
+        csvArraylist = CSVtoArray("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
     }
 
-    public void readCSVColumn() {
+    /*public void readCSVColumn() {
         try {
 
-            CSVReader reader = new CSVReader(new FileReader("D:\\TEC\\II Semestre\\Algoritmos y Estructuras de Datos I\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt"));
+            CSVReader reader = new CSVReader(new FileReader("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt"));
 
             String[] nextLine;
             int rowNumber = 0;
@@ -61,18 +67,21 @@ public class Calculadora implements Serializable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
+    }*/
 
-    public void CSVtoArray(String filePath){
+    public List<String[]> CSVtoArray(String filePath){
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
             List<String[]> r = reader.readAll();
             r.forEach(x -> System.out.println(Arrays.toString(x)));
+            r.remove(0);
+            return r;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void writeDataLineByLine(String filePath) {
+    /*public void writeDataLineByLine(String filePath) {
         // first create file object for file placed at location
         // specified by filepath
 
@@ -93,7 +102,7 @@ public class Calculadora implements Serializable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void writeDataAtEnd(String filePath) {
         try {
