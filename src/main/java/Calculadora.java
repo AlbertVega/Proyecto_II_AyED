@@ -50,24 +50,6 @@ public class Calculadora implements Serializable {
         csvArraylist = CSVtoArray("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt");
     }
 
-    /*public void readCSVColumn() {
-        try {
-
-            CSVReader reader = new CSVReader(new FileReader("C:\\Users\\huawei\\Documents\\GitHub\\Proyecto_II_AyED\\src\\main\\java\\CSV.txt"));
-
-            String[] nextLine;
-            int rowNumber = 0;
-            while ((nextLine = reader.readNext()) != null) {
-                rowNumber++;
-                String name = nextLine[1];
-                String name2 = nextLine[2];
-            }
-            System.out.println(Arrays.toString(nextLine));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }*/
 
     public List<String[]> CSVtoArray(String filePath){
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
@@ -80,29 +62,6 @@ public class Calculadora implements Serializable {
         }
         return null;
     }
-
-    /*public void writeDataLineByLine(String filePath) {
-        // first create file object for file placed at location
-        // specified by filepath
-
-        File file = new File(filePath);
-        try {
-            // create FileWriter object with file as parameter
-            FileWriter outputfile = new FileWriter(file);
-
-            // create CSVWriter object filewriter object as parameter
-            CSVWriter writer = new CSVWriter(outputfile);
-
-            // adding header to csv
-            String[] header = {"Expresión", "Resultado", "Fecha"};
-            writer.writeNext(header);
-            // closing writer connection
-            writer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }*/
 
     public void writeDataAtEnd(String filePath) {
         try {
