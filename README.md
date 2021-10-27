@@ -11,6 +11,83 @@ El algoritmo para construir un árbol de expresión requiere utilizar la notaci�
 ## Diagrama de Clases
 ![image](https://user-images.githubusercontent.com/85046754/138995068-546fc6aa-24ba-4e31-83ca-e5b38b3e72a2.png)
 
+## Árbol de Expresión Binaria
+La calculadora utiliza un árbol de expresión binaria que se evalua y obtiene el resultado de la operación. El árbol se genera a partir de un charArray de la operación en notación postfija, se recorre el charArray y se van creando los nodos por cada casilla del array. Si el nodo es un operador simplemente agrega el operador al stack, si es un operando busca el operando que le sigue y los agrega al stack, vease el método constructTree.
+
+    Node constructTree(char[] postfix) {
+        Stack<Node> st = new Stack<>();
+        Node t, t1, t2;
+
+        // Traverse through every character of
+        // input expression
+        for (int i = 0; i < postfix.length; i++) {
+
+            // If operand, simply push into stack
+            if (!isOperator(postfix[i])) {
+                t = new Node(postfix[i]);
+                st.push(t);
+            } else // operator
+            {
+                t = new Node(postfix[i]);
+
+                // Pop two top nodes
+                // Store top
+                t1 = st.pop();      // Remove top
+                t2 = st.pop();
+
+                //  make them children
+                t.right = t1;
+                t.left = t2;
+
+                // System.out.println(t1 + "" + t2);
+                // Add this subexpression to stack
+                st.push(t);
+            }
+        }
+
+        //  only element will be root of expression
+        // tree
+        t = st.peek();
+        st.pop();
+
+        return t;
+    }
+
+Una vez creado el árbol se debe evaluar utilizando un método llamado evalTree, este recorre la rama izquierda hasta encontrar un nodo sin hijos, luego recorre las rama derecha de la misma manera, una vez que ambas ramas fueron recorridas se resuelven las operaciones utilizando los valores de los nodos sin hijos y los operadores que los contienen.
+
+    public int evalTree(Node root) {
+        // Empty tree
+        if (root == null)
+            return 0;
+
+        // Leaf node i.e, an integer
+        if (root.left == null && root.right == null)
+            return Character.getNumericValue(root.value);
+
+        // Evaluate left subtree
+        int leftEval = evalTree(root.left);
+
+        // Evaluate right subtree
+        int rightEval = evalTree(root.right);
+
+        // Check which operator to apply
+        if (String.valueOf(root.value).equals("+"))
+            return leftEval + rightEval;
+
+        if (String.valueOf(root.value).equals("-"))
+            return leftEval - rightEval;
+
+        if (String.valueOf(root.value).equals("*"))
+            return leftEval * rightEval;
+
+        if (String.valueOf(root.value).equals("/"))
+            return leftEval / rightEval;
+
+        if (String.valueOf(root.value).equals("%"))
+            return leftEval % rightEval;
+
+        return 0;
+    }
 
 ## Problemas encontrados
 La mayoría de los problemas presentados en proyecto son en cuestiones de código en general, aunado a esto se presnetaron problemas con los commits en github.
