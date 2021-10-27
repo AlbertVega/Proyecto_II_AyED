@@ -89,6 +89,85 @@ Una vez creado el árbol se debe evaluar utilizando un método llamado evalTree,
         return 0;
     }
 
+## Algoritmos Desarrollados
+* **toPostfix**
+
+        public static String toPostfix(String exp){
+        // initializing empty String for result
+        StringBuilder result = new StringBuilder(new String(""));
+
+        // initializing empty stack
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i<exp.length(); ++i)
+        {
+            char c = exp.charAt(i);
+
+            // If the scanned character is an
+            // operand, add it to output.
+            if (Character.isLetterOrDigit(c))
+                result.append(c);
+
+                // If the scanned character is an '(',
+                // push it to the stack.
+            else if (c == '(')
+                stack.push(c);
+
+                //  If the scanned character is an ')',
+                // pop and output from the stack
+                // until an '(' is encountered.
+            else if (c == ')')
+            {
+                while (!stack.isEmpty() &&
+                        stack.peek() != '(')
+                    result.append(stack.pop());
+
+                stack.pop();
+            }
+            else // an operator is encountered
+            {
+                while (!stack.isEmpty() && Prec(c)
+                        <= Prec(stack.peek())){
+
+                    result.append(stack.pop());
+                }
+                stack.push(c);
+            }
+
+        }
+
+        // pop all the operators from the stack
+        while (!stack.isEmpty()){
+            if(stack.peek() == '(')
+                return "Invalid Expression";
+            result.append(stack.pop());
+        }
+        return result.toString();
+      }
+    
+Éste método se encarga de convertir una entrada, que es una expresión matemática en notación sufija, y pasarla a la notación postfija, debido a que el árbol de expresión binaria, necesita de una expresión en notación postfija para poder construirse, ya que el proyecto así lo requiere, de esta manera esta clase primeramente utiliza otro algoritmo implementado llamado prec y basarse en la importancia de las operaciones que le asignó a cada carcatér, para posteriormente hacer verificaciones y pasar la entrada infija a postfija.
+
+* **Prec**
+
+        static int Prec(char ch) {
+        switch (ch)
+        {
+            case '+':
+            case '-':
+                return 1;
+
+            case '*':
+            case '/':
+                return 2;
+
+            case '%':
+                return 3;
+        }
+        return -1;
+      }
+   
+Es bien sabido que las matemáticas tienen sus reglas, y esto aplica también para el orden de las operaciones matemáticas que se realizan en una expresión, pues éste método se encaraga de asignarle una importancia a cada operacion para que de ésta manera se ejecuten primero las de mayor importancia, siendo que si es una suma o resta, les asigna una importancia de 1, si es multiplicación o división les asigna un 2, y si es un módulo asigna un 3, siendo el 1 el menos importante y el 3 el más importante.
+
 ## Problemas encontrados
 La mayoría de los problemas presentados en proyecto son en cuestiones de código en general, aunado a esto se presnetaron problemas con los commits en github.
 Uno de los problemas presentados fue a la hora de integrar el servidor Tomcat a al proyecto, ya que se crearon problemas de compatibilidad e integración de las clases de Java con el servidor, en cuanto al manejo y proyección de datos en la pagina web mediante el servidor.
