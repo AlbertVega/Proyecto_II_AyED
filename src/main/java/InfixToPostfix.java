@@ -15,8 +15,7 @@ public class InfixToPostfix {
      * @param ch char del operador
      * @return nivel de importancia
      */
-    static int Prec(char ch)
-    {
+    static int Prec(char ch) {
         switch (ch)
         {
             case '+':
@@ -42,8 +41,7 @@ public class InfixToPostfix {
      * @param exp string en notación infija
      * @return string en notación postfija
      */
-    public static String toPostfix(String exp)
-    {
+    public static String toPostfix(String exp){
         // initializing empty String for result
         StringBuilder result = new StringBuilder(new String(""));
 
