@@ -1,31 +1,48 @@
-// Java program to construct an expression tree
-
 import java.util.Stack;
 
-// Java program for expression tree
+/**
+ * Clase del nodo del árbol de expresión binario.
+ */
 class Node {
-
+    /**
+     * Almacena el value del nodo.
+     */
     char value;
+    /**
+     * Almacena un puntero al hijo izquierdo y derecho del nodo.
+     */
     Node left, right;
 
+    /**
+     * Construye el nodo.
+     * @param item value del nodo
+     */
     Node(char item) {
         value = item;
         left = right = null;
     }
 }
 
+/**
+ * Clase del árbol de expresión binario.
+ */
 class ExpressionTree {
 
-    // A utility function to check if 'c'
-    // is an operator
-
+    /**
+     * Verifica si el char es un operador.
+     * @param c value del nodo
+     * @return true si es un operador
+     */
     boolean isOperator(char c) {
         return c == '+' || c == '-'
                 || c == '*' || c == '/'
                 || c == '%';
     }
 
-    // Utility function to do inorder traversal
+    /**
+     * Lee el arbol en notación infija.
+     * @param t nodo root
+     */
     void inorder(Node t) {
         if (t != null) {
             inorder(t.left);
@@ -34,8 +51,11 @@ class ExpressionTree {
         }
     }
 
-    // Returns root of constructed tree for given
-    // postfix expression
+    /**
+     * Construye el árbol de expresión apartir de un array con los caracteres en notación postfija.
+     * @param postfix array con los caracteres en notación postfija
+     * @return nodo root del árbol
+     */
     Node constructTree(char[] postfix) {
         Stack<Node> st = new Stack<>();
         Node t, t1, t2;
@@ -75,6 +95,11 @@ class ExpressionTree {
         return t;
     }
 
+    /**
+     * Evalua el árbol de expresión binaria.
+     * @param root nodo root del árbol
+     * @return resultado del árbol de expresión
+     */
     public int evalTree(Node root)
     {
         // Empty tree
@@ -121,5 +146,3 @@ class ExpressionTree {
 
     }
 }
-
-// This code has been contributed by Mayank Jaiswal

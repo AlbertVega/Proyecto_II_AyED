@@ -1,4 +1,8 @@
 import java.util.Stack;
+
+/**
+ * Esta clase convierte un string de notación infija a postfija.
+ */
 public class InfixToPostfix {
 
     // A utility function to return
@@ -6,6 +10,11 @@ public class InfixToPostfix {
     // Higher returned value means
     // higher precedence
 
+    /**
+     * Este método se encarga de definir un nivel de importancia dependiendo del operador, a mayor importancia mayor el valor retornado.
+     * @param ch char del operador
+     * @return nivel de importancia
+     */
     static int Prec(char ch)
     {
         switch (ch)
@@ -27,6 +36,12 @@ public class InfixToPostfix {
     // The main method that converts
     // given infix expression
     // to postfix expression.
+
+    /**
+     * Este método se encarga de retornar un string en notación postfija a partir de un string en notación infija.
+     * @param exp string en notación infija
+     * @return string en notación postfija
+     */
     public static String toPostfix(String exp)
     {
         // initializing empty String for result
